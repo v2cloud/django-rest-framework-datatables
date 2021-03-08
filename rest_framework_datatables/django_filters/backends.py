@@ -62,8 +62,9 @@ class DatatablesFilterBackend(filters.DatatablesBaseFilterBackend,
         form_fields = {}
         field_queries = {}
         for f in query['fields']:
-            form_fields[f['data']] = f['search_value']
-            field_queries[f['data']] = f
+            if 'data' in f:
+                form_fields[f['data']] = f['search_value']
+                field_queries[f['data']] = f
         query['form_fields'] = form_fields
         query['field_queries'] = field_queries
         return query
